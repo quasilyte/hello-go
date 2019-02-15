@@ -119,3 +119,31 @@ godoc -http=:8080
 увидите ту же документацию, что была доступна онлайн.
 
 Сайт [godoc.org](https://godoc.org/) можно использовать для поиска Go пакетов и/или их документации.
+
+## Какие ещё есть полезные ресурсы?
+
+Большинство ссылок легко найти в гугле по запросу "golang learning resources".<br>
+Самое главное правило - всегда искать по слову `golang`, а не `go`.<br>
+
+Ниже наиболее стоящие результаты с описаниями:
+
+* [Resources for new Go programmers](https://dave.cheney.net/resources-for-new-go-programmers) - статья [Dave Cheney](https://dave.cheney.net/about), одного из ведущих разработчиков Go.
+* [golang/go/wiki/Learn](https://github.com/golang/go/wiki/Learn) - много учебного материала.
+* [Go videos](https://github.com/hH39797J/golang-videos-ru) - собрание видеозаписей докладов про Go.
+* [Go webdev examples](https://gowebexamples.com/) - аналог Go by example, но с уклоном в веб разработку.
+
+## Что такое "сообщество Go"?
+
+[GolangShow](http://golangshow.com) - русскоязычный подкаст о Go. Крутые ведущие, интересные гости.
+
+Сообщество стоит понимать как "группа людей со схожими интересами и/или целями".
+
+[golang-ru Slack](http://slack.golang-ru.com) - русскоязычное Go сообщество.
+Там можно задавать вопросы, обсуждать Go, библиотеки под него и прочее.
+
+Для вопросов лучше всего подходит канал `#school` (при формулировке вопроса можно
+опираться на [How To Ask Questions The Smart Way](http://www.catb.org/esr/faqs/smart-questions.html)).
+
+Всем участникам следует соблюдать [кодекс норм поведения](https://golang.org/conduct).
+
+Для Казани есть группа [GolangKazan](https://vk.com/golangkazan).
