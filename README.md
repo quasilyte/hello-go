@@ -132,6 +132,14 @@ godoc -http=:8080
 * [Go videos](https://github.com/hH39797J/golang-videos-ru) - собрание видеозаписей докладов про Go.
 * [Go webdev examples](https://gowebexamples.com/) - аналог Go by example, но с уклоном в веб разработку.
 
+## Книги по Go
+
+Многие книги имеют переводы на русский язык.
+
+* [Get programming with Go](https://www.manning.com/books/get-programming-with-go) - хорошая книга если Go один из первых ваших языков программирования.
+* [The Go Programming Language](http://www.gopl.io/) - очень известная книга, довольно хороша, но подойдёт только тем, кто уже более-менее комфортно программирует на одном или более языках программирования.
+* [Go in practice](https://www.manning.com/books/go-in-practice) - книга, которая может дополнить книги, перечисленные выше.
+
 ## Что такое "сообщество Go"?
 
 [GolangShow](http://golangshow.com) - русскоязычный подкаст о Go. Крутые ведущие, интересные гости.
