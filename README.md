@@ -128,6 +128,7 @@ godoc -http=:8080
 
 Ниже наиболее стоящие результаты с описаниями:
 
+* [Golang book (перевод на русский)](http://golang-book.ru)
 * [Resources for new Go programmers](https://dave.cheney.net/resources-for-new-go-programmers) - статья [Dave Cheney](https://dave.cheney.net/about), одного из ведущих разработчиков Go.
 * [golang/go/wiki/Learn](https://github.com/golang/go/wiki/Learn) - много учебного материала.
 * [Go videos](https://github.com/hH39797J/golang-videos-ru) - собрание видеозаписей докладов про Go.
