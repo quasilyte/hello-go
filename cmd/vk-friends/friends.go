@@ -57,7 +57,7 @@ func (args *arguments) parse() error {
 	flag.Parse()
 
 	if n := len(flag.Args()); n != 1 {
-		return fmt.Errorf("expected exactly 1 positional arrgument, got %d", n)
+		return fmt.Errorf("expected exactly 1 positional argument, got %d", n)
 	}
 
 	args.command = flag.Args()[0]
@@ -169,9 +169,7 @@ func (ctxt *context) listCommand() error {
 
 	friends := resp["response"].([]interface{})
 	fmt.Printf("friends (%d):\n", len(friends))
-	ctxt.printFriends(friends)
-
-	return nil
+	return ctxt.printFriends(friends)
 }
 
 func (ctxt *context) onlineCommand() error {
@@ -182,9 +180,7 @@ func (ctxt *context) onlineCommand() error {
 
 	friends := resp["response"].([]interface{})
 	fmt.Printf("friends online (%d):\n", len(friends))
-	ctxt.printFriends(friends)
-
-	return nil
+	return ctxt.printFriends(friends)
 }
 
 func (ctxt *context) validateArgs() error {
