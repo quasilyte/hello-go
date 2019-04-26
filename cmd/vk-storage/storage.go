@@ -61,9 +61,7 @@ func (args *arguments) parse() error {
 }
 
 func storageGet(args *arguments) {
-	resp, err := apiGet(args,
-		"method/storage.get",
-		fmt.Sprintf("key=%s", args.commandArgs[0]))
+	resp, err := apiGet(args, "method/storage.get", "key="+args.commandArgs[0])
 	if err != nil {
 		log.Panic(err)
 	}
@@ -73,8 +71,8 @@ func storageGet(args *arguments) {
 func storageSet(args *arguments) {
 	resp, err := apiGet(args,
 		"method/storage.set",
-		fmt.Sprintf("key=%s", args.commandArgs[0]),
-		fmt.Sprintf("value=%s", args.commandArgs[1]))
+		"key="+args.commandArgs[0],
+		"value="+args.commandArgs[1])
 	if err != nil {
 		log.Panic(err)
 	}
