@@ -10,7 +10,6 @@ import (
 	"net/url"
 	"sort"
 	"strings"
-	"time"
 )
 
 // Утилита, демонстрирующая использование VK API без каких-либо
@@ -226,30 +225,24 @@ func (ctxt *context) printStats() error {
 	return nil
 }
 
-// getUserString формирует строку, описывающую пользователя по его ID из vk.
-func (ctxt *context) getUserString(id int) (string, error) {
-	resp, err := ctxt.apiGet("method/users.get", fmt.Sprintf("user_id=%d", id))
-	if err != nil {
-		return "", err
-	}
-	user := resp["response"].([]interface{})[0].(map[string]interface{})
-	return fmt.Sprintf("%s %s", user["first_name"], user["last_name"]), nil
-}
-
 // printFriends печатает список друзей.
-// Скорость выполнения не быстрее 2-х друзей в секунду из-за rate limit ограничений.
 func (ctxt *context) printFriends(friends []interface{}) error {
-	for i, id := range friends {
-		id := int(id.(float64))
-		name, err := ctxt.getUserString(id)
-
-		// Для пользовательского токена есть лимит на 3 запроса в секунду.
-		time.Sleep(time.Second / 2)
-
-		if err != nil {
-			return err
-		}
-		fmt.Printf("\t%4d %s (ID=%d)\n", i+1, name, id)
+	var ids []string
+	for _, id := range friends {
+		ids = append(ids, fmt.Sprint(int(id.(float64))))
 	}
+
+	idsParam := strings.Join(ids, ",")
+	resp, err := ctxt.apiGet("method/users.get", "user_ids="+idsParam)
+	if err != nil {
+		return err
+	}
+	users := resp["response"].([]interface{})
+
+	for i, user := range users {
+		user := user.(map[string]interface{})
+		fmt.Printf("\t%4d %s %s\n", i+1, user["first_name"], user["last_name"])
+	}
+
 	return nil
 }
