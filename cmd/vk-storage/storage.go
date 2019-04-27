@@ -17,6 +17,8 @@ import (
 // Пример использования:
 //	$ vk-storage -token $TOKEN set mykey 123
 //	$ vk-storage -token $TOKEN get mykey
+//
+// Для более интересного примера смотри cmd/vk-friends.
 
 func main() {
 	var args arguments
@@ -35,13 +37,18 @@ func main() {
 	}
 }
 
+// arguments - аргументы командной строки.
 type arguments struct {
+	// Все поля описаны внутри метода parse.
+
 	token       string
 	apiVersion  string
 	command     string
 	commandArgs []string
 }
 
+// parse связывает аргументы командной строки с объектом args.
+// Не производит детальной валидации.
 func (args *arguments) parse() error {
 	flag.StringVar(&args.token, "token", "",
 		`A token for VK API access_token parameter`)
@@ -80,6 +87,8 @@ func storageSet(args *arguments) {
 }
 
 func apiURL(args *arguments, path string, params ...string) *url.URL {
+	// Мы могли бы просто сформировать строку, но url.URL
+	// можно использовать как простой билдер для URL'ов.
 	u := url.URL{
 		Scheme: "https",
 		Host:   "api.vk.com",

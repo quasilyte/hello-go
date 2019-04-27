@@ -15,11 +15,18 @@ import (
 
 // Утилита, демонстрирующая использование VK API без каких-либо
 // сторонних библиотек на примере friends методом.
+//
+// Пример использования:
+//	$ vk-friends -token $TOKEN online
+//	$ vk-friends -token $TOKEN list
+//
+// Для более простого примера смотри cmd/vk-storage.
 
 func main() {
 	var args arguments
 	ctxt := newContext(&args)
 
+	// Все шаги программы, в последовательности выполнения.
 	steps := []struct {
 		name string
 		fn   func() error
@@ -32,6 +39,7 @@ func main() {
 
 	for _, step := range steps {
 		ctxt.debugf("start %q step", step.name)
+		// Единственное место для обработки ошибок в main функции.
 		if err := step.fn(); err != nil {
 			log.Printf("%s: %v", step.name, err)
 			return
@@ -39,13 +47,18 @@ func main() {
 	}
 }
 
+// arguments - аргументы командной строки.
 type arguments struct {
+	// Все поля описаны внутри метода parse.
+
 	token      string
 	apiVersion string
 	command    string
 	verbose    bool
 }
 
+// parse связывает аргументы командной строки с объектом args.
+// Не производит детальной валидации.
 func (args *arguments) parse() error {
 	flag.StringVar(&args.token, "token", "",
 		`A token for VK API access_token parameter`)
@@ -65,9 +78,16 @@ func (args *arguments) parse() error {
 	return nil
 }
 
+// context хранит состояние выполнения программы.
+// Для создания экземпляра следует использовать newContext.
 type context struct {
-	args     *arguments
+	args *arguments
+
+	// commands хранит все зарегистрированные обработчики.
+	// Заполняется в newContext.
 	commands map[string]func() error
+
+	// requests является счётчиком выполненного количества запросов к API.
 	requests int
 }
 
@@ -83,6 +103,8 @@ func newContext(args *arguments) *context {
 }
 
 func (ctxt *context) apiURL(path string, params ...string) *url.URL {
+	// Мы могли бы просто сформировать строку, но url.URL
+	// можно использовать как простой билдер для URL'ов.
 	u := url.URL{
 		Scheme: "https",
 		Host:   "api.vk.com",
@@ -101,6 +123,7 @@ func (ctxt *context) apiURL(path string, params ...string) *url.URL {
 
 type vkResponse map[string]interface{}
 
+// debugf подобен log.Printf, но печатает только в verbose режиме.
 func (ctxt *context) debugf(format string, args ...interface{}) {
 	if ctxt.args.verbose {
 		log.Printf("debug: "+format, args...)
@@ -134,31 +157,6 @@ func (ctxt *context) apiGet(path string, params ...string) (vkResponse, error) {
 	}
 
 	return resp, nil
-}
-
-func (ctxt *context) getUserString(id int) (string, error) {
-	resp, err := ctxt.apiGet("method/users.get", fmt.Sprintf("user_id=%d", id))
-	if err != nil {
-		return "", err
-	}
-	user := resp["response"].([]interface{})[0].(map[string]interface{})
-	return fmt.Sprintf("%s %s", user["first_name"], user["last_name"]), nil
-}
-
-func (ctxt *context) printFriends(friends []interface{}) error {
-	for i, id := range friends {
-		id := int(id.(float64))
-		name, err := ctxt.getUserString(id)
-
-		// Для пользовательского токена есть лимит на 3 запроса в секунду.
-		time.Sleep(time.Second / 2)
-
-		if err != nil {
-			return err
-		}
-		fmt.Printf("\t%4d %s (ID=%d)\n", i+1, name, id)
-	}
-	return nil
 }
 
 func (ctxt *context) listCommand() error {
@@ -199,11 +197,17 @@ func (ctxt *context) validateArgs() error {
 		return fmt.Errorf("%s argument can't be empty", check.name)
 	}
 
+	// Проверяем, что подкоманда определена.
 	if _, ok := ctxt.commands[ctxt.args.command]; !ok {
+		// Если пользователь использует неправильную команду,
+		// соберём список доступных комманд и подскажем ему их.
 		var hints []string
 		for command := range ctxt.commands {
 			hints = append(hints, command)
 		}
+		// Поскольку map в Go не отсортирован, после получения
+		// ключей их следует отсортировать, иначе каждый раз
+		// подсказки будут печататься в разном порядке.
 		sort.Strings(hints)
 		return fmt.Errorf("unrecognized command %q (supported commands: %s)",
 			ctxt.args.command, strings.Join(hints, ", "))
@@ -213,10 +217,39 @@ func (ctxt *context) validateArgs() error {
 }
 
 func (ctxt *context) execCommand() error {
+	// Делегируем выполнение зарегистрированной команде.
 	return ctxt.commands[ctxt.args.command]()
 }
 
 func (ctxt *context) printStats() error {
 	log.Printf("made %d API requests", ctxt.requests)
+	return nil
+}
+
+// getUserString формирует строку, описывающую пользователя по его ID из vk.
+func (ctxt *context) getUserString(id int) (string, error) {
+	resp, err := ctxt.apiGet("method/users.get", fmt.Sprintf("user_id=%d", id))
+	if err != nil {
+		return "", err
+	}
+	user := resp["response"].([]interface{})[0].(map[string]interface{})
+	return fmt.Sprintf("%s %s", user["first_name"], user["last_name"]), nil
+}
+
+// printFriends печатает список друзей.
+// Скорость выполнения не быстрее 2-х друзей в секунду из-за rate limit ограничений.
+func (ctxt *context) printFriends(friends []interface{}) error {
+	for i, id := range friends {
+		id := int(id.(float64))
+		name, err := ctxt.getUserString(id)
+
+		// Для пользовательского токена есть лимит на 3 запроса в секунду.
+		time.Sleep(time.Second / 2)
+
+		if err != nil {
+			return err
+		}
+		fmt.Printf("\t%4d %s (ID=%d)\n", i+1, name, id)
+	}
 	return nil
 }
