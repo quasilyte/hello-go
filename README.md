@@ -19,6 +19,8 @@
 * Если любите смотреть уже готовые примеры решений и сравнивать их с решениями
   на знакомых вам языках программирования, загляните в [rosettacode](http://www.rosettacode.org/wiki/Category:Go).
   Аналогичным ресурсом является [Go by example](https://gobyexample.com/).
+* Для rosettacode есть сайт с side-by-side сравнением решений на двух языках.
+  Вот, например, страница для [Go<->Python](https://rosetta.alhur.es/compare/Go/Python/).
 * Для уверенных в себе есть [learnxinyminutes](https://learnxinyminutes.com/docs/ru-ru/go-ru/),
   который, правда, может быть недоступен без прокси для некоторых провайдеров интернета.
   На всякий случай, у нас есть [локальная копия](assets/learn-x-in-y-minutes.md), но GitHub отображает контент менее привлекательным образом.
