@@ -13,12 +13,14 @@
 ## Структура
 
 * Если нравится формат FAQ, читайте дальше и пропустите эту секцию.
-* Если любите решать задачки на [leetcode](https://leetcode.com/problemset/all/?difficulty=Easy)
+* Если любите решать задачки на [leetcode](https://leetcode.com/problemset/all/?difficulty=Easy), [Codewars](https://www.codewars.com/), [CodinGame](https://www.codingame.com/start) или [HackerRank](https://www.hackerrank.com/), 
   есть возможность отправлять решения на Go. Окружающие вас смогут помочь
   вам заполнить пробелы в знании языка и, возможно, подсказать оптимальное решение.
 * Если любите смотреть уже готовые примеры решений и сравнивать их с решениями
   на знакомых вам языках программирования, загляните в [rosettacode](http://www.rosettacode.org/wiki/Category:Go).
   Аналогичным ресурсом является [Go by example](https://gobyexample.com/).
+* Для rosettacode есть сайт с side-by-side сравнением решений на двух языках.
+  Вот, например, страница для [Go<->Python](https://rosetta.alhur.es/compare/Go/Python/).
 * Для уверенных в себе есть [learnxinyminutes](https://learnxinyminutes.com/docs/ru-ru/go-ru/),
   который, правда, может быть недоступен без прокси для некоторых провайдеров интернета.
   На всякий случай, у нас есть [локальная копия](assets/learn-x-in-y-minutes.md), но GitHub отображает контент менее привлекательным образом.
@@ -33,7 +35,7 @@
 Скачать нужный дистрибутив по ссылке: https://golang.org/dl/.
 Есть версии под Windows, Linux и macOS.
 
-Качать последнюю стабильную версию (1.11.5).
+Качать последнюю стабильную версию (1.12.4).
 
 ## Какой текстовой редактор использовать для Go?
 
