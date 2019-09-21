@@ -1,12 +1,10 @@
 package main
 
 import (
-	"bytes"
 	"flag"
 	"image"
 	"image/draw"
 	"image/png"
-	"io/ioutil"
 	"log"
 	"os"
 )
@@ -21,8 +19,8 @@ func main() {
 	height := flag.Int("h", 600, "output image height in pixels")
 	outFilename := flag.String("out", "gopher.png", "output file name")
 	flag.Parse()
-	parts := flag.Args()
-	if len(parts) == 0 {
+	filenames := flag.Args() // Gopher parts
+	if len(filenames) == 0 {
 		log.Fatalf("expected 1 or more command-line arguments")
 	}
 
@@ -30,12 +28,13 @@ func main() {
 	// Every image is a layer.
 	// The order of layers is important.
 	var layers []image.Image
-	for i, part := range parts {
-		data, err := ioutil.ReadFile(part)
+	for i, filename := range filenames {
+		f, err := os.Open(filename)
 		if err != nil {
-			log.Panicf("read part[%d]: %v", i, err)
+			log.Panicf("open part[%d]: %v", i, err)
 		}
-		img, err := png.Decode(bytes.NewReader(data))
+		defer f.Close()
+		img, err := png.Decode(f)
 		if err != nil {
 			log.Panicf("decode part[%d]: %v", i, err)
 		}
