@@ -120,6 +120,7 @@ godoc -http=:8080
 
 Ниже наиболее стоящие результаты с описаниями:
 
+* [С чего начать новичку в Go](http://dev.tulu.la/post/go-newbies/)
 * [Golang book (перевод на русский)](http://golang-book.ru)
 * [Resources for new Go programmers](https://dave.cheney.net/resources-for-new-go-programmers) - статья [Dave Cheney](https://dave.cheney.net/about), одного из ведущих разработчиков Go.
 * [golang/go/wiki/Learn](https://github.com/golang/go/wiki/Learn) - много учебного материала.
