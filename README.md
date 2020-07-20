@@ -4,8 +4,7 @@
 
 * Если нравится формат FAQ, читайте дальше и пропустите эту секцию.
 * Если любите решать задачки на [leetcode](https://leetcode.com/problemset/all/?difficulty=Easy), [Codewars](https://www.codewars.com/), [CodinGame](https://www.codingame.com/start) или [HackerRank](https://www.hackerrank.com/), 
-  есть возможность отправлять решения на Go. Окружающие вас смогут помочь
-  вам заполнить пробелы в знании языка и, возможно, подсказать оптимальное решение.
+  есть возможность отправлять решения на Go.
 * Если любите смотреть уже готовые примеры решений и сравнивать их с решениями
   на знакомых вам языках программирования, загляните в [rosettacode](http://www.rosettacode.org/wiki/Category:Go).
   Аналогичным ресурсом является [Go by example](https://gobyexample.com/).
