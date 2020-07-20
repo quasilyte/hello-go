@@ -3,21 +3,14 @@
 ## Способы изучать Go
 
 * Если нравится формат FAQ, читайте дальше и пропустите эту секцию.
-* Если любите решать задачки на [leetcode](https://leetcode.com/problemset/all/?difficulty=Easy), [Codewars](https://www.codewars.com/), [CodinGame](https://www.codingame.com/start) или [HackerRank](https://www.hackerrank.com/), 
-  есть возможность отправлять решения на Go.
+* Если любите решать задачки на [leetcode](https://leetcode.com/problemset/all/?difficulty=Easy), [Codewars](https://www.codewars.com/), [CodinGame](https://www.codingame.com/start) или [HackerRank](https://www.hackerrank.com/), то можете попробовать решать их на Go (они поддерживают решения на этом языке).
 * Если любите смотреть уже готовые примеры решений и сравнивать их с решениями
   на знакомых вам языках программирования, загляните в [rosettacode](http://www.rosettacode.org/wiki/Category:Go).
   Аналогичным ресурсом является [Go by example](https://gobyexample.com/).
 * Для rosettacode есть сайт с side-by-side сравнением решений на двух языках.
   Вот, например, страница для [Go<->Python](https://rosetta.alhur.es/compare/Go/Python/).
-* Для уверенных в себе есть [learnxinyminutes](https://learnxinyminutes.com/docs/ru-ru/go-ru/),
-  который, правда, может быть недоступен без прокси для некоторых провайдеров интернета.
-  На всякий случай, у нас есть [локальная копия](assets/learn-x-in-y-minutes.md), но GitHub отображает контент менее привлекательным образом.
+* Для уверенных в себе есть [learnxinyminutes](https://learnxinyminutes.com/docs/ru-ru/go-ru/). Качество подачи не слишком высокое, но это один из самых быстрых способов изучить самые базовые возможности языка.
 * Если есть опыт с другими языками программирования, можно попробовать [go tour](https://tour.golang.org/welcome/1).
-* Если опыт работы с Go уже есть, попробуйте сформулировать что вам было бы интересно
-  узнать вдобавок. С чем вы не работали? С чем у вас возникали проблемы?
-
-И самое главное - общение, контакты и положительные эмоции.
 
 ## Как установить Go?
 
